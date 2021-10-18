@@ -1,0 +1,24 @@
+.icon-guest {
+    width: 15px;
+}
+
+.icon-bed, .icon-location {
+    width: 20px;
+}
+
+.info {
+    float: left;
+    margin-right: 28px;
+    font-weight: bold;
+}
+label {
+    font-size: 1rem;
+}
+
+input, select, .input-group-text {
+    margin-bottom: 20px;
+}
+
+.btn-save {
+    margin-right: 30px;
+}

@@ -1,0 +1,25 @@
+<div class="router-container">
+    <p><a class="btn btn-primary" routerLink="/admin/apartments/new">New Apartment</a>
+    </p>
+    <p><input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
+    </p>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price/night</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of filteredApartments">
+                <td>{{a.title}}</td>
+                <td>{{a.category.name}}</td>
+                <td>{{a.dailyPrice | currency: 'EUR'}}</td>
+                <td><a [routerLink]="['/admin/apartments/', a._id]">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

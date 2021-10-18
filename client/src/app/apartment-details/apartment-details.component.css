@@ -1,0 +1,69 @@
+.error {
+    color: red;
+}
+.image {
+    position: relative;
+}
+.img-apartment {
+    width: 100%;
+    height: auto;
+}
+
+.img-text {
+    position: absolute;
+    background-color: #376d37;
+    color: #fff;
+    border-radius: 2px;
+    padding: 4px;
+    top: 5%;
+    left: 0;
+}
+
+.overview {
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 0.25rem;
+    
+}
+
+.features div {
+    background-color: #e9ecef;
+    margin: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: rgba(0,0,0,0.8);
+    float: left;
+}
+
+.features div img {
+    width: 20px;
+}
+
+.price-text {
+    color: #6c757d;
+    font-size: 18px;
+}
+
+.price {
+    color: #f00;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.price, .price-text {
+    float: right;
+}
+.reserve-flex {
+    display: flex;
+  }
+
+.cancellation {
+    margin-left: auto;
+}
+
+.cancellation {
+    color: #376d37;
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 5px;
+}
+

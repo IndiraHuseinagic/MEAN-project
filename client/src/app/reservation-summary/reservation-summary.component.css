@@ -1,0 +1,14 @@
+.price {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.img-apartment {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+}
+
+.btn-back, .btn-delete {
+  width: 90px;
+}

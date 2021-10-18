@@ -1,0 +1,61 @@
+.icon-guest {
+    width: 15px;
+}
+
+.icon-bed, .icon-location {
+    width: 20px;
+}
+.info {
+    float: left;
+    margin-right: 28px;
+    font-weight: bold;
+}
+
+.price-text {
+    color: #6c757d;
+    font-size: 18px;
+}
+
+.price {
+    color: #f00;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.card-body {
+  min-width: 40%;
+}
+.card .card-img-top {
+    width: 100%;
+    height: 100%;
+  }
+  .price-flex{
+    display: flex;
+  }
+
+  .price {
+    margin: 12px auto 0 0;
+   }
+  
+
+  .btn-choose {
+      margin-right: 18px;
+  }
+
+  .image {
+    position: relative;
+}
+
+.img-text {
+    position: absolute;
+    background-color: #376d37;
+    color: #fff;
+    border-radius: 2px;
+    padding: 4px;
+    top: 5%;
+    left: -2%;
+}
+
+.active {
+    color: #000;
+}

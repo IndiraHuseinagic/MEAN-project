@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">MODERN HOME </a>
+      
+      <button class="navbar-toggler" (click)="isNavbarCollapsed = !isNavbarCollapsed"  type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0" (click)="isNavbarCollapsed = !isNavbarCollapsed">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/apartments">Apartments</a>
+          </li>
+        </ul>
+        <hr>
+
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+
+          <ng-template #anonymousUser>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+          </ng-template>
+          <li ngbDropdown display="dynamic" *ngIf="isLoggedIn; else anonymousUser" class="nav-item dropdown my-auto">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" 
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                 {{ user?.name }}
+              </a>
+             <ul ngbDropdownMenu class="dropdown-menu" (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-labelledby="dropdown01">
+              <li><a class="dropdown-item" routerLink="/my/profile">My Profile</a></li>
+              <li><a class="dropdown-item" routerLink="/my/reservations">My Reservations</a></li> 
+              <ng-container *ngIf="user?.isAdmin">
+                 <li><a class="dropdown-item" routerLink="/admin/apartments">Manage Apartments</a></li>
+                 <li><a class="dropdown-item" routerLink="/admin/reservations">Manage Reservations</a></li>
+              </ng-container>
+              <li class="dropdown-item"><a (click)="logout()">Log Out</a></li>        
+             </ul>
+           </li>
+
+        </ul>        
+      </div>
+    </div>
+  </nav>
+
+  
+   

@@ -1,0 +1,151 @@
+.main-img {
+    background: url("../../assets/img/wallpaper.jpg") no-repeat center center; 
+    background-size: cover;
+    margin-top: 0 !important;
+    position: relative;
+    width: 100%;
+    height: 92vh; 
+    top:0;
+    left:0;
+}
+
+.main-img-front {
+    position:absolute;
+    background: rgba(0,0,0,0.6);
+    left: 2.5%;
+    top: 65%;
+    width: 95%;
+    height: 25vh;    
+}
+
+
+/*datepicker*/
+::ng-deep .mat-form-field-flex {
+    background-color: #fff !important;
+}
+
+
+::ng-deep .mat-form-field {
+    padding: 0 !important;
+    width: 90% !important;
+    
+}
+::ng-deep .mat-form-field-wrapper {
+    padding: 0 !important;
+}
+::ng-deep .mat-form-field-underline {
+    bottom: 0 !important;
+}
+
+::ng-deep .mat-form-field-flex {
+    border-radius: 5px !important;
+} 
+
+::ng-deep .mat-form-field-label {
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    color: #000 !important;
+    font-size: 15px !important;
+}
+
+.guests {
+    padding: 13px;
+    border-radius: 5px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    width: 90%;
+}
+
+.btn-search {
+    padding: 13px;
+    border-radius: 5px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    width: 90%; 
+}
+
+
+.text-1, .text-2 {
+    font-weight: 600;
+}
+
+.text-1 {
+    font-size: 36px;
+}
+.text-2 {
+    font-size: 20px;
+}
+
+div[id='Business Stays'] {
+    background: url("../../assets/img/looking-for-roommate.jpg") no-repeat center center; 
+    background-size: cover;
+    width: 100%;
+    height: 300px; 
+}
+
+div[id='Family Homes'] {
+    background: url("../../assets/img/familyHomes.jpg") no-repeat center center; 
+    background-size: cover;
+    width: 100%;
+    height: 300px; 
+}
+
+div[id='Luxury Homes'] {
+    background: url("../../assets/img/luxuryHomes.jpg") no-repeat center center; 
+    background-size: cover;
+    width: 100%;
+    height: 300px; 
+}
+
+div[id='Tech studios'] {
+    background: url("../../assets/img/techStudios.jpg") no-repeat center center; 
+    background-size: cover;
+    width: 100%;
+    height: 300px; 
+}
+
+.home-text {
+    font-size: 20px;
+}
+
+.card-title {
+    font-size: 20px;
+}
+.card {
+    border: 0;
+}
+
+.card-img-top {
+    border-radius: 0;
+}
+
+a.category-card {
+    text-decoration: none;
+    color: #c27486;
+}
+a.category-card:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.img-renting {
+    width: 90vw;
+}
+
+.steps {
+    background-color: rgba(0,0,0,0.1);
+    width: 90vw;
+}
+.img-steps {
+    width:50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.step-text {
+    width: 150px;
+}
+
+.step-no {
+    margin-top: 15px;
+    color: #376d37;
+}

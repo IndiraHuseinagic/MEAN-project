@@ -1,0 +1,93 @@
+<div class="router-container">
+<div class="row info" *ngIf="apartment">
+ 
+  <div class="col-12 col-lg-6 image"> 
+    <img [src]="apartment.imageUrl" class="img-apartment"> 
+    <div class="img-text">Gratis Cancellation</div>   
+  </div>    
+        
+ 
+    <div class="col-12 col-lg-6">
+        <h1 class="mt-3">{{ apartment.title }}</h1>
+        <p>{{apartment.category.name}}, {{ apartment.address }},
+           {{apartment.guests}} guest(s), {{ apartment.area }} m<sup>2</sup></p>
+        
+        <hr>
+        
+        <mat-form-field appearance="fill">
+          <mat-label> Check In </mat-label>
+          <input matInput   [min]="d.min1" [max]="d.max1"
+           [matDatepicker]="checkin"
+           [matDatepickerFilter]="rangeFilter"
+           (dateInput)="checkInChange($event.value)">
+          <mat-datepicker-toggle matSuffix [for]="checkin"></mat-datepicker-toggle>
+          <mat-datepicker #checkin></mat-datepicker>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+          <mat-label> Check Out </mat-label>
+          <input matInput [min]="d.min2" [max]="d.max2" 
+          [matDatepicker]="checkout"
+          [matDatepickerFilter]="rangeFilter"
+          (dateInput)="checkOutChange($event.value)">
+          <mat-datepicker-toggle matSuffix [for]="checkout"></mat-datepicker-toggle>
+          <mat-datepicker #checkout></mat-datepicker>
+      </mat-form-field>
+    <div class="error small mb-4" *ngIf="validationMessage">Please enter a valid CheckIn/CheckOut date</div>
+        
+     <div class="clearfix mt-4">
+      <p class="price-text">Price for night </p>
+     </div> 
+     <div class="clearfix">
+      <p class="price">{{ apartment.dailyPrice | currency: 'EUR' }}</p>
+     </div>
+     
+      <div class="reserve-flex">
+        <button class="btn btn-primary btn-block" (click)="reserve()"><span class="d-none d-sm-inline">Online</span> Reserve </button>   
+        <p class="cancellation">GRATIS Canellation!</p>
+      </div>
+
+    
+</div>
+
+
+<div class="overview p-4 mt-4">
+  <h1>Overview</h1>
+  <h3>Property features</h3>
+  <div class="features clearfix">
+    <div><img src="../../assets/img/furnished2.png" alt=""> Furnished</div>
+    <div><img src="../../assets/img/wlan2.png" alt=""> WLAN</div>
+    <div><img src="../../assets/img/parking.png" alt=""> Parking</div>
+    <div><img src="../../assets/img/tv.png" alt=""> TV</div>
+    <div><img src="../../assets/img/ac.png" alt=""> A/C</div>
+    <div><img src="../../assets/img/kitchen2.png" alt=""> Equipped kitchen</div>
+    <div><img src="../../assets/img/dishwasher.png" alt=""> Dishwasher</div>
+    <div><img src="../../assets/img/balcony.png" alt=""> Balcony or terrace</div>
+    <div><img src="../../assets/img/elevator.png" alt=""> Elevator</div>
+    <div><img src="../../assets/img/area.png" alt=""> {{apartment.area}} m<sup>2</sup></div>
+  </div>
+
+
+  <div class="details my-4">
+  <h3>Details</h3>
+  <ul>
+    <li>Property type:  apartment</li>
+    <li>Category:  {{ apartment.category.name }}</li>
+    <li>Area: {{ apartment.area }} m²</li>
+    <li>Floor: 5th</li>
+    <li>Elevator: yes</li>
+    <li>Number of bathrooms: 1</li>    
+  </ul>
+  </div>
+  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  </p>
+
+</div>
+
+
+
+</div>
+
