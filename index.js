@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'client/dist/modern-home')));
+app.use(express.static(path.join(__dirname, 'client/dist')));
 
 require('./startup/routes')(app);
 require('./startup/db')();
@@ -29,7 +29,7 @@ const server = app.listen(port, () => console.log(`Listening on port ${port}...`
  // });
  
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/dist/modern-home/index.html'));
+    res.sendFile(path.join(__dirname, 'client/dist/index.html'));
 });
   
   // error handler
