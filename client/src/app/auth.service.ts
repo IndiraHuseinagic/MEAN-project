@@ -10,8 +10,8 @@ import { catchError } from 'rxjs/operators';
 export class AuthService {
 
   // Node/Express API
-REST_API: string = 'http://localhost:3000/api/auth';
-
+//REST_API: string = 'http://localhost:3000/api/auth';
+REST_API: string ='https://modern-home.herokuapp.com/api/auth'
 // Http Header
 httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 

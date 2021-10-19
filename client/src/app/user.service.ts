@@ -1,8 +1,5 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { User } from './models/user';
 
 
 @Injectable({
@@ -10,7 +7,8 @@ import { User } from './models/user';
 })
 export class UserService {
   // Node/Express API
-REST_API: string = 'http://localhost:3000/api/users';
+//REST_API: string = 'http://localhost:3000/api/users';
+REST_API: string ='https://modern-home.herokuapp.com/api/users'
 
 // Http Header
 httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');

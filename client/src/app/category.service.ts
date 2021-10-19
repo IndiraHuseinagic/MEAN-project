@@ -10,7 +10,8 @@ import { Category } from './models/category';
 export class CategoryService {
 
 // Node/Express API
-REST_API: string = 'http://localhost:3000/api/categories';
+//REST_API: string = 'http://localhost:3000/api/categories';
+REST_API: string ='https://modern-home.herokuapp.com/api/categories'
 
 // Http Header
 httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');

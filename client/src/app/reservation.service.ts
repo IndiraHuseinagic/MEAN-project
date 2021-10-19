@@ -10,7 +10,8 @@ import { catchError, map } from 'rxjs/operators';
 export class ReservationService {
 
   // Node/Express API
-REST_API: string = 'http://localhost:3000/api/reservations';
+//REST_API: string = 'http://localhost:3000/api/reservations';
+REST_API: string ='https://modern-home.herokuapp.com/api/reservations'
 
 // Http Header
 httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');

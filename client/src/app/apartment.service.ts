@@ -9,7 +9,8 @@ import { Apartment } from './models/apartment';
 export class ApartmentService {
 
   // Node/Express API
-REST_API: string = 'http://localhost:3000/api/apartments';
+//REST_API: string = 'http://localhost:3000/api/apartments';
+REST_API: string ='https://modern-home.herokuapp.com/api/apartments'
 
 // Http Header
 httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
