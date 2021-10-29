@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApartmentsComponent } from './apartments/apartments.component';
 import { LoginComponent } from './login/login.component';
@@ -29,13 +27,13 @@ import { ReservationSummaryComponent } from './reservation-summary/reservation-s
 import { ApartmentFormComponent } from './apartment-form/apartment-form.component';
 import { BackButtonDirective } from './back-button.directive';
 import { InterceptorService } from './interceptor.service';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    CategoriesComponent,
     ApartmentsComponent,
     LoginComponent,
     RegisterComponent,
@@ -49,7 +47,8 @@ import { InterceptorService } from './interceptor.service';
     AdminApartmentsComponent,
     ReservationSummaryComponent,
     ApartmentFormComponent,
-    BackButtonDirective
+    BackButtonDirective,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
 {
     "jwtPrivateKey": "1234",
-    "db": "mongodb+srv://admindb:njemacki@cluster0.hvy54.mongodb.net/test"
+    "db": "mongodb+srv://admindb:njemacki@cluster0.hvy54.mongodb.net/modern-home_test"
 }

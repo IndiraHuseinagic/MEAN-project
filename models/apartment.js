@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const {categorySchema} = require('./category');
-const {rentedSchema} = require('./range');
+const { categorySchema } = require('./category');
+const { rentedSchema } = require('./rented');
 
 const Apartment = mongoose.model('Apartment', new mongoose.Schema({
     title: {
@@ -30,23 +30,23 @@ const Apartment = mongoose.model('Apartment', new mongoose.Schema({
     guests: {
         type: Number,
         required: true,
-        min:1,
-        max:15
-    }, 
+        min: 1,
+        max: 15
+    },
     area: {
         type: Number,
         required: true,
-        min:10,
-        max:200
-    }, 
+        min: 10,
+        max: 200
+    },
     unavailable: {
         type: [rentedSchema]
     },
     dailyPrice: {
         type: Number,
         required: true,
-        min:0,
-        max:255
+        min: 0,
+        max: 255
     }
 }));
 
@@ -58,12 +58,12 @@ function validateApartment(apartment) {
         address: Joi.string().min(5).max(255).required(),
         guests: Joi.number().min(1).max(15).required(),
         area: Joi.number().min(10).max(200).required(),
-        unavailable: Joi.array(), 
+        unavailable: Joi.array(),
         dailyPrice: Joi.number().min(5).max(255).required()
     });
 
-  return schema.validate(apartment);    
+    return schema.validate(apartment);
 }
 
 exports.Apartment = Apartment;
-exports.validate = validateApartment;
+exports.validateApartment = validateApartment;

@@ -16,7 +16,7 @@
         
         <mat-form-field appearance="fill">
           <mat-label> Check In </mat-label>
-          <input matInput   [min]="d.min1" [max]="d.max1"
+          <input matInput [min]="d.min1" [max]="d.max1"
            [matDatepicker]="checkin"
            [matDatepickerFilter]="rangeFilter"
            (dateInput)="checkInChange($event.value)">
@@ -55,16 +55,16 @@
   <h1>Overview</h1>
   <h3>Property features</h3>
   <div class="features clearfix">
-    <div><img src="../../assets/img/furnished2.png" alt=""> Furnished</div>
-    <div><img src="../../assets/img/wlan2.png" alt=""> WLAN</div>
-    <div><img src="../../assets/img/parking.png" alt=""> Parking</div>
-    <div><img src="../../assets/img/tv.png" alt=""> TV</div>
-    <div><img src="../../assets/img/ac.png" alt=""> A/C</div>
-    <div><img src="../../assets/img/kitchen2.png" alt=""> Equipped kitchen</div>
-    <div><img src="../../assets/img/dishwasher.png" alt=""> Dishwasher</div>
-    <div><img src="../../assets/img/balcony.png" alt=""> Balcony or terrace</div>
-    <div><img src="../../assets/img/elevator.png" alt=""> Elevator</div>
-    <div><img src="../../assets/img/area.png" alt=""> {{apartment.area}} m<sup>2</sup></div>
+    <div><img src="../../assets/img/furnished2.png" width="20" alt="furnished"> Furnished</div>
+    <div><img src="../../assets/img/wlan2.png" width="20" alt="wlan"> WLAN</div>
+    <div><img src="../../assets/img/parking.png" width="20" alt="parking"> Parking</div>
+    <div><img src="../../assets/img/tv.png" width="20" alt="tv"> TV</div>
+    <div><img src="../../assets/img/ac.png" width="20" alt="ac"> A/C</div>
+    <div><img src="../../assets/img/kitchen2.png" width="20" alt="kitchen"> Equipped kitchen</div>
+    <div><img src="../../assets/img/dishwasher.png" width="20" alt="dishwasher"> Dishwasher</div>
+    <div><img src="../../assets/img/balcony.png" width="20" alt="balcony"> Balcony or terrace</div>
+    <div><img src="../../assets/img/elevator.png" width="20" alt="elevator"> Elevator</div>
+    <div><img src="../../assets/img/area.png" width="20" alt="area"> {{apartment.area}} m<sup>2</sup></div>
   </div>
 
 

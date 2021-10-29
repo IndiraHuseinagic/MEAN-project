@@ -1,39 +1,52 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { environment } from './../environments/environment';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userSubject: BehaviorSubject<any>;
+  public user$: Observable<any>;
 
   // Node/Express API
-//REST_API: string = 'http://localhost:3000/api/auth';
-REST_API: string ='https://modern-home.herokuapp.com/api/auth'
-// Http Header
-httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+  REST_API: string = environment.baseUrl + '/auth';
 
+   // Http Header
+   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
+  constructor(private httpClient: HttpClient) {
+    this.userSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('user') || "{}"));
+    this.user$ = this.userSubject.asObservable();
+   }
+   
+   get userValue() {
+      return this.userSubject.value;
+   }
+
 
   login(user: any) {
-    let returnUrl=this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-    localStorage.setItem('returnUrl', returnUrl);
-
     const body = JSON.stringify(user);
-    let API_URL = `${this.REST_API}`; 
-    return this.httpClient.post(API_URL, body, { headers: this.httpHeaders, responseType: 'text' });
-  };
+    return this.httpClient.post(this.REST_API, body, { headers: this.httpHeaders, responseType: 'text' , observe: 'response'})
+       .pipe(map((res: HttpResponse<any>) => {
+         //header
+         const token = res.headers.get('x-auth-token') || "";
+         localStorage.setItem('token', token);
+
+         //body
+         const user = JSON.parse(res.body);
+         localStorage.setItem('user', JSON.stringify(user));
+         this.userSubject.next(user);
+         return user;
+        }));
+   };
 
   logout(){
-   localStorage.removeItem('token'); 
-  }
-  
-  isLoggedIn() {
-    return localStorage.getItem('token') !== null;
-  }
-  
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('user'); 
+    this.userSubject.next(null);
+  } 
 
 }

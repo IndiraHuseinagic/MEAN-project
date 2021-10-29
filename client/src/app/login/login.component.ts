@@ -1,42 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  user = {
-    email: "",
-    password: ""
-  }; 
+export class LoginComponent{
+  user = {email: "", password: ""}; 
+  errorMessage: string ="";
+  hide: boolean = true;
 
-  constructor(private authS: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  constructor(
+    private authS: AuthService, 
+    private router: Router, 
+    private route: ActivatedRoute) {}
 
   login(){
-    this.authS.login(this.user)
-    .subscribe(token => {
-      this.user = {
-        email: "",
-        password: ""
-      }; 
-
-    localStorage.setItem('token', token);
-    let returnUrl=localStorage.getItem('returnUrl') || '/';
-    localStorage.removeItem('returnUrl');
-    
-    alert('Log in successful!');
-    
-    this.router.navigateByUrl(returnUrl);     
-    
-    });
-
-
-
+    this.authS.login(this.user).pipe(first()).subscribe(
+        data => {
+           alert('Log in successful!');
+            let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+            this.router.navigateByUrl(returnUrl);
+          },      
+        error =>{
+         this.errorMessage = error;
+       }); 
   }
+
+
 }

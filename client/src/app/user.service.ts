@@ -1,5 +1,8 @@
+import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -7,30 +10,28 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
   // Node/Express API
-//REST_API: string = 'http://localhost:3000/api/users';
-REST_API: string ='https://modern-home.herokuapp.com/api/users'
+REST_API: string = environment.baseUrl + '/users';
 
 // Http Header
 httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
+constructor(private httpClient: HttpClient, private authS: AuthService) { }
 
-  constructor(private httpClient: HttpClient) { }
-
-  register(user: any) {
+  register(user: any) : Observable<any>{
     const body = JSON.stringify(user);
-    let API_URL = `${this.REST_API}`; 
-    return this.httpClient.post(API_URL, body, { headers: this.httpHeaders });
+    return this.httpClient.post(this.REST_API, body, { headers: this.httpHeaders });
   };
-
-  // Get all users
-  getAllUsers() {
-    return this.httpClient.get(`${this.REST_API}`);
-  }
 
   // Get user
   getUser() {
-    let headers = this.httpHeaders.set('x-auth-token', localStorage.getItem('token') || "");
-      return this.httpClient.get(`${this.REST_API}/me`, {headers:headers});
+    const token = localStorage.getItem('token') || "";
+    //me
+    if(token){
+      let headers = this.httpHeaders.set('x-auth-token', token);
+      return this.httpClient.get(`${this.REST_API}/me`, {headers: headers});
+    }
+    //empty user
+    return of({});
   }
   
 }

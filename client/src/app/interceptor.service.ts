@@ -6,6 +6,7 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -14,24 +15,27 @@ import { catchError, retry } from 'rxjs/operators';
 })
 
 export class InterceptorService implements HttpInterceptor {
-    intercept(
-      request: HttpRequest<any>,
-      next: HttpHandler
-    ): Observable<HttpEvent<any>> {
+constructor(private router: Router){}
+
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       return next.handle(request)
         .pipe(
           retry(1),
           catchError((error: HttpErrorResponse) => {
             let errorMessage = '';
+            let warning = '';
             if (error.error instanceof ErrorEvent) {
               // client-side error
-              errorMessage = `Error: ${error.error.message}`;
+              errorMessage = `Client: Error: ${error.error.message}`;
+              warning = error.error.message;
+
             } else {
               // server-side error
-              errorMessage = `Error Status: ${error.status}\nMessage: ${error.message}`;
-            }
+              errorMessage = `Server: Error Status: ${error.status}\nMessage: ${error.message}`;
+              warning = error.error;     
+              } 
             console.log(errorMessage);
-            return throwError(errorMessage);
+            return throwError(warning);
           })
         );
     }

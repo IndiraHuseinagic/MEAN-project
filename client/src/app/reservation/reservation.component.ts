@@ -1,10 +1,12 @@
+import { DateService } from './../date.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { Observable  } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ApartmentService } from '../apartment.service';
 import { UserService } from '../user.service';
-import { SharedService } from '../shared.service';
 import { ReservationService } from '../reservation.service';
+import { take } from 'rxjs/operators';
+import { Apartment } from '../models/apartment';
 
 @Component({
   selector: 'app-reservation',
@@ -12,46 +14,41 @@ import { ReservationService } from '../reservation.service';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent  {
-  apartment$: Observable<any>;
+  apartment$: Observable<Apartment>;
   user$: Observable<any>;
-  range: any; 
-  numberOfDays: number = 1;
-  validationMessage: boolean = false;
+  checkIn: Date;
+  checkOut: Date;
+  daysDiff: number = 1;
 
   constructor(
     private route: ActivatedRoute,
     private apartmentS: ApartmentService,
-    private router: Router,
     private userS: UserService,
-    private sharedS: SharedService,
-    private reservationS: ReservationService) {
+    private dateS: DateService,
+    private reservationS: ReservationService,
+    private router: Router) {
 
     const apartmentId = this.route.snapshot.paramMap.get('id') || "";
     this.apartment$ = this.apartmentS.getApartment(apartmentId);
-  
     this.user$ = this.userS.getUser();
 
-   this.sharedS.range.subscribe(range => {
-     this.range = range; 
-       const numberOfms = range.checkOut.getTime() - range.checkIn.getTime();
-       this.numberOfDays = Math.round(numberOfms/(1000*3600*24));
-      });
-   }
+    this.checkIn = this.dateS.checkInValue;
+    this.checkOut = this.dateS.checkOutValue;
 
+    this.daysDiff = this.dateS.daysDiff(this.checkIn, this.checkOut);
+   }
  
   finish(userId: string, apartmentId: string, checkIn: Date, checkOut: Date) {
-   
-    if(!checkIn || !checkOut) {
-      alert("Please enter a valid CheckIn/CheckOut date");
-      this.router.navigate(['/apartments/'+ apartmentId]);
-     }
-     
-     else {
-      const reservation = { userId, apartmentId, checkIn, checkOut } //userId: userId...
-      this.reservationS.addReservation(reservation).subscribe();
-      alert('Thank You for Your Reservation')
-      this.router.navigate(['/']);   
-     }
-  }
+    const reservation = { userId, apartmentId, checkIn, checkOut } //userId: userId...
+     this.reservationS.addReservation(reservation).subscribe(
+        (reservation)=>{
+          alert('Thank You for Your Reservation')
+          this.router.navigate(['/']);  
+        },
+        (error)=> {
+          alert(error);
+          this.router.navigate(['/apartments/'+ apartmentId]);
+        });  
+     }     
 
 }

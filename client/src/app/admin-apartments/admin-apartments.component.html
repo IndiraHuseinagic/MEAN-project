@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let a of filteredApartments">
+            <tr *ngFor="let a of filteredApartments$ | async">
                 <td>{{a.title}}</td>
                 <td>{{a.category.name}}</td>
                 <td>{{a.dailyPrice | currency: 'EUR'}}</td>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { first, take } from 'rxjs/operators';
 import { ApartmentService } from '../apartment.service';
 import { CategoryService } from '../category.service';
 import { Category } from '../models/category';
@@ -12,10 +13,11 @@ import { Category } from '../models/category';
 })
 export class ApartmentFormComponent {
 
-  categories!: Category[];
+  categories$: Observable<Category[]>;
   apartment: any = {};
   apartmentId: string | null; 
-
+  errorMessage : string = "";
+ 
 
   constructor(
     private categoryS: CategoryService, 
@@ -23,13 +25,13 @@ export class ApartmentFormComponent {
     private router: Router, 
     private route: ActivatedRoute) { 
 
-    this.categoryS.getAllCategories().subscribe(categories => this.categories = categories);
+    this.categories$ =this.categoryS.getAllCategories();
     this.apartmentId=this.route.snapshot.paramMap.get('id');
     
     this.apartment.unavailable= [];
 
    if(this.apartmentId){
-     this.apartmentS.getApartment(this.apartmentId).pipe(take(1)).subscribe(apartment=> {
+      this.apartmentS.getApartment(this.apartmentId).pipe(take(1)).subscribe(apartment=> {
       const {category, _id, ...other} = apartment; //remove category and _id
       this.apartment = other;
       this.apartment.categoryId = apartment.category._id //add categoryId 
@@ -39,13 +41,25 @@ export class ApartmentFormComponent {
 
   save(){
 
-    if(this.apartmentId)
-    this.apartmentS.updateApartment(this.apartmentId, this.apartment).subscribe();
+    if(this.apartmentId){
+      this.apartmentS.updateApartment(this.apartmentId, this.apartment).pipe(first()).subscribe(
+        data => {
+          this.router.navigate(['admin/apartments']);
+          },      
+        error =>{
+         this.errorMessage = error;
+       }); 
+    }
 
-    else
-    this.apartmentS.addApartment(this.apartment).subscribe();
-
-    this.router.navigate(['admin/apartments']);
+    else {
+      this.apartmentS.addApartment(this.apartment).pipe(first()).subscribe(
+        data => {
+          this.router.navigate(['admin/apartments']);
+          },      
+        error =>{
+         this.errorMessage = error;
+       }); 
+    } 
   }
 
   delete(){

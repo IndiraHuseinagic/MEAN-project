@@ -1,10 +1,9 @@
 const Joi = require('joi');
-const validate = require("../middleware/validate");
 const mongoose = require('mongoose');
 const moment = require('moment');
 
 const reservationSchema = new mongoose.Schema({
-  user: { 
+  user: {
     type: new mongoose.Schema({
       name: {
         type: String,
@@ -12,20 +11,20 @@ const reservationSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 50
       },
-      
+
       email: {
         type: String,
         required: true,
         minlength: 5,
         maxlength: 255
-    },
+      },
       phone: {
         type: String,
         required: true,
         minlength: 5,
         maxlength: 50
-      }      
-    }),  
+      }
+    }),
     required: true
   },
   apartment: {
@@ -33,7 +32,7 @@ const reservationSchema = new mongoose.Schema({
       title: {
         type: String,
         required: true,
-        trim: true, 
+        trim: true,
         minlength: 5,
         maxlength: 255
       },
@@ -52,35 +51,28 @@ const reservationSchema = new mongoose.Schema({
       dailyPrice: {
         type: Number,
         required: true,
-        min:0,
-        max:255
+        min: 0,
+        max: 255
       }
     }),
     required: true
   },
-  checkIn: { 
-    type: Date, 
+  checkIn: {
+    type: Date,
     required: true,
   },
-  checkOut: { 
+  checkOut: {
     type: Date,
     required: true
   },
-  rentalFee: { 
-    type: Number, 
+  rentalFee: {
+    type: Number,
     min: 0
   }
 });
 
-reservationSchema.statics.lookup = function(userId, apartmentId) {
-  return this.findOne({
-    'user._id': userId,
-    'apartment._id': apartmentId,
-  });
-}
-
-reservationSchema.methods.setRentalFee = function() {
-  let checkIn =  moment(this.checkIn, "YYYY-MM-DD");
+reservationSchema.methods.setRentalFee = function () {
+  let checkIn = moment(this.checkIn, "YYYY-MM-DD");
   let checkOut = moment(this.checkOut, "YYYY-MM-DD");
 
   const rentalDays = checkOut.diff(checkIn, 'days');
@@ -98,8 +90,8 @@ function validateReservation(reservation) {
     checkOut: Joi.date().required()
   });
 
-  return schema.validate(reservation);  
+  return schema.validate(reservation);
 }
 
-module.exports.Reservation = Reservation; 
-module.exports.validate = validateReservation;
+module.exports.Reservation = Reservation;
+module.exports.validateReservation = validateReservation;

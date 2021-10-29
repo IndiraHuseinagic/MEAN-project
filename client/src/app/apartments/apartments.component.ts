@@ -1,7 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApartmentService } from '../apartment.service';
-import { switchMap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Apartment } from '../models/apartment';
 
 @Component({
   selector: 'app-apartments',
@@ -9,60 +11,59 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./apartments.component.css']
 })
 export class ApartmentsComponent implements OnInit{
-apartments: any;
-queryCheckIn: string ="";
-queryCheckOut: string ="";
-guests: string ="";
-category: string = "";
+apartments$: Observable<Apartment[]>;
 
-toShow:any[] = [];
-number: any[] =[];
-onNum: number=0;
-biggest: any;
 
   constructor(
     private apartmentS: ApartmentService, 
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute) {
+
+      this.apartments$ = this.apartmentS.getAllApartments();
+    }
 
   ngOnInit(){
     this.populateApartments();
   }
 
    private populateApartments() { 
-    this.apartmentS.getAllApartments()
-      .pipe(switchMap(apartments => {
-        this.apartments = apartments;
-        return this.route.queryParamMap;
-      }))
-      .subscribe(params => {
-        this.queryCheckIn= params.get('checkIn') || "";
-        this.queryCheckOut = params.get('checkOut') || "";
-        this.guests = params.get('guests') || "";
-        this.category = params.get('category') || "";
-        this.applyFilter();      
-      });
+    this.route.queryParamMap.pipe(take(1)).subscribe(params => {
+       const filter = {
+           checkIn:  params.get('checkIn') || "",
+           checkOut: params.get('checkOut') || "",
+           guests:   params.get('guests') || "",
+           category: params.get('category') || ""}
+      this.applyFilter(filter);      
+    });
   }
 
-  private applyFilter() { 
+  private applyFilter(f: any) {  
+    
+       this.apartments$ = this.apartments$.pipe(map(apartments =>{
+         
+        if(f.checkIn && f.checkOut) 
+           apartments = apartments.filter(a => !this.overlap(a.unavailable, f.checkIn, f.checkOut));
 
-    if(this.queryCheckIn && this.queryCheckOut) 
-      this.apartments = this.apartments.filter((a: { unavailable: { checkOut: string; checkIn: string; }[]; }) => !this.overlap(a.unavailable));
- 
-    if(this.guests && this.guests!=="Guests")
-    this.apartments =  this.apartments.filter((a: { guests: number; })=> a.guests === +this.guests); 
- 
-    if(this.category)
-      this.apartments =  this.apartments.filter((a: { category: { name: string; }; }) => a.category.name === this.category); 
- 
-    }
+        if(f.guests) 
+          apartments = apartments.filter(a=> a.guests === +f.guests);
+          
+        if(f.category)
+          apartments =  apartments.filter(a => a.category.name === f.category);
 
-  private overlap(ranges: any){   
-   return ranges.some((range: { checkOut: string; checkIn: string; }) =>
+          return apartments;
+       }))
+   }
+
+
+  private overlap(ranges: any, checkIn: string, checkOut: string){   
+   return ranges.some((range: { checkIn: string; checkOut: string })  =>
      (Math.min(new Date(range.checkOut).getTime(), 
-               new Date(this.queryCheckOut).getTime())-
+               new Date(checkOut).getTime())-
       Math.max(new Date(range.checkIn).getTime(),  
-               new Date(this.queryCheckIn).getTime()))>0); 
+               new Date(checkIn).getTime()))>0); 
   }
+
+
+
 
 
 }

@@ -1,3 +1,4 @@
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { ReservationSummaryComponent } from './reservation-summary/reservation-summary.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,8 @@ import { MyReservationsComponent } from './my-reservations/my-reservations.compo
 import { AdminApartmentsComponent } from './admin-apartments/admin-apartments.component';
 import { AdminReservationsComponent } from './admin-reservations/admin-reservations.component';
 import { ApartmentFormComponent } from './apartment-form/apartment-form.component';
+import { AdminAuthGuard } from './admin-auth-guard.service';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,16 +25,18 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'my/profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'my/reservations', component: MyReservationsComponent },
-  { path: 'admin/apartments/new', component: ApartmentFormComponent },
-  { path: 'admin/apartments/:id', component: ApartmentFormComponent },
-  { path: 'admin/apartments', component: AdminApartmentsComponent },
-  { path: 'admin/reservations', component: AdminReservationsComponent },
-  { path: 'reservation-summary/:id', component: ReservationSummaryComponent }
+  { path: 'my/reservations', component: MyReservationsComponent, canActivate: [AuthGuard] },
+  { path: 'admin/apartments/new', component: ApartmentFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'admin/apartments/:id', component: ApartmentFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'admin/apartments', component: AdminApartmentsComponent, canActivate: [AuthGuard, AdminAuthGuard]},
+  { path: 'admin/reservations', component: AdminReservationsComponent, canActivate: [AuthGuard, AdminAuthGuard]},
+  { path: 'reservation-summary/:id', component: ReservationSummaryComponent },
+  { path: 'forbidden', component: ForbiddenComponent },
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

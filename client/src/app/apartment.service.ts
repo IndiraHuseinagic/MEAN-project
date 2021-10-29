@@ -2,31 +2,31 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Apartment } from './models/apartment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApartmentService {
 
-  // Node/Express API
-//REST_API: string = 'http://localhost:3000/api/apartments';
-REST_API: string ='https://modern-home.herokuapp.com/api/apartments'
+// Node/Express API
+REST_API: string = environment.baseUrl + '/apartments';
 
 // Http Header
 httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-headers = this.httpHeaders.set('x-auth-token', localStorage.getItem('token') || "");
 
 constructor(private httpClient: HttpClient) { }
 
 // Add
 addApartment(data: any): Observable<any> {
-  let API_URL = `${this.REST_API}`; 
-  return this.httpClient.post(API_URL, data, { headers: this.headers });
+  let token = localStorage.getItem('token') || "";
+  let headers = this.httpHeaders.set('x-auth-token', token);
+  return this.httpClient.post(this.REST_API, data, { headers: headers });
 }
 
 // Get all objects
 getAllApartments(): Observable<Apartment[]> {
-  return this.httpClient.get<Apartment[]>(`${this.REST_API}`);
+  return this.httpClient.get<Apartment[]>(this.REST_API);
 }
 
 // Get single object
@@ -36,15 +36,19 @@ getApartment(id:any): Observable<Apartment> {
 }
 
 // Update
-updateApartment(id:any, data:any): Observable<Apartment> {
+updateApartment(id:any, data:any): Observable<any> {
   let API_URL = `${this.REST_API}/${id}`;
-  return this.httpClient.put<Apartment>(API_URL, data, { headers: this.headers });
+  let token = localStorage.getItem('token') || "";
+  let headers = this.httpHeaders.set('x-auth-token', token);
+  return this.httpClient.put(API_URL, data, { headers: headers });
 }
 
 // Delete
-deleteApartment(id:any): Observable<Apartment> {
+deleteApartment(id:any): Observable<any> {
   let API_URL = `${this.REST_API}/${id}`;
-  return this.httpClient.delete<Apartment>(API_URL, { headers: this.headers});
+  let token = localStorage.getItem('token') || "";
+  let headers = this.httpHeaders.set('x-auth-token', token);
+  return this.httpClient.delete(API_URL, { headers: headers});
 }
 
 }

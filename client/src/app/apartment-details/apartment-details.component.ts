@@ -3,16 +3,16 @@ import { ApartmentService } from './../apartment.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-apartment-details',
   templateUrl: './apartment-details.component.html',
   styleUrls: ['./apartment-details.component.css']
 })
-export class ApartmentDetailsComponent  {
+export class ApartmentDetailsComponent {
 apartmentId: string;
 apartment: any;
+
 ranges: any[] = []; 
 rangeFilter: any;
 
@@ -25,7 +25,6 @@ validationMessage: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private apartmentS: ApartmentService,
-    private sharedS: SharedService, 
     private router: Router,
     private dateS: DateService) {
 
@@ -35,7 +34,7 @@ validationMessage: boolean = false;
        this.ranges = a.unavailable;
     }); 
     
-    this.d = this.dateS.limits();
+    this.d = this.dateS.minMaxLimits();
     
     this.rangeFilter = (d: Date | null) : Boolean => {
       if(!d) return false;
@@ -45,22 +44,19 @@ validationMessage: boolean = false;
             d <= new Date(range.checkOut))
       }
     }
+
   }
   
   checkInChange(checkIn: any | null){
-    this.d.min2 = this.dateS.changeDay(checkIn, 1);
+    this.d.min2 = this.dateS.nextDay(checkIn);
     this.checkIn = checkIn;
-    this.sharedS.changeRange({
-      checkIn: this.checkIn,
-      checkOut: this.checkOut});
+    this.dateS.changeCheckIn(checkIn);  
   }
   
   checkOutChange(checkOut: any | null){
-    this.d.max1 = this.dateS.changeDay(checkOut, -1);
+    this.d.max1 = this.dateS.previousDay(checkOut);
     this.checkOut = checkOut;
-    this.sharedS.changeRange({
-      checkIn: this.checkIn, 
-      checkOut: this.checkOut});
+    this.dateS.changeCheckOut(checkOut);
   }
 
  reserve(){
@@ -73,6 +69,5 @@ validationMessage: boolean = false;
     this.router.navigate(['/apartments/reservation/' + this.apartmentId]);
    }
  }
-
 
 }

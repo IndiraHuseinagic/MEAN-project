@@ -34,10 +34,6 @@
     float: left;
 }
 
-.features div img {
-    width: 20px;
-}
-
 .price-text {
     color: #6c757d;
     font-size: 18px;
@@ -67,3 +63,10 @@
     margin-top: 5px;
 }
 
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+    top: 50px !important;
+}
+
+::ng-deep .mat-form-field {
+    width: 200px !important;   
+}

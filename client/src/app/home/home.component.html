@@ -28,11 +28,11 @@
         
         <div class="filter col-6 col-md-3 p-0 d-flex">
         <select class="form-select guests mx-auto align-self-center" [(ngModel)]= "guests" aria-label="Select guests">
-            <option ngValue="Guests" selected>Guests</option>
+            <option [ngValue]="0"> Guests</option>
             <option ngValue="1">1 Guest</option>
             <option ngValue="2">2 Guests</option>
             <option ngValue="3">3 Guests</option>
-            <option ngvalue="4">4 Guests</option>
+            <option ngValue="4">4 Guests</option>
         </select>
         </div>
         <div class="filter col-6 col-md-3 p-0 d-flex">
@@ -46,14 +46,10 @@
 <div class="router-container">
    <h1 class="text-1 text-center">Rent furnished apartments</h1>
    <h2 class="text-2 text-center pb-5">Looking for an apartment or house for rent? </h2>
+   <p class="home-text text-center">Your perfect place to live, work, or study is just one click away!</p>
 
-   
-
-<p class="home-text text-center">Your perfect place to live, work, or study is just one click away!</p>
-
-<div class="row text-center justify-content-center pb-5">
-   
-<div class="card col-6 col-md-3 mb-3" *ngFor="let c of categories$ | async" style="width: 18rem;">
+<div class="row text-center justify-content-center pb-5"> 
+<div class="card mb-3" *ngFor="let c of categories$ | async" style="width: 18rem;">
     <a class="category-card" [routerLink]="['/apartments/']" [queryParams]="{category: c.name}">
       <div class="card-img-top" id="{{c.name}}"></div>
       <div class="card-body">

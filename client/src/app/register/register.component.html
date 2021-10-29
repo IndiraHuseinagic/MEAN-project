@@ -20,14 +20,18 @@
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="password">Password</label>
-                  <input #password="ngModel" name="password" [(ngModel)]="user.password" type="text" id="password" class="form-control" />
+                    <div class="input-group">
+                      <input #password="ngModel" name="password" [(ngModel)]="user.password" [type]="hide ? 'password' : 'text'" id="password" class="form-control" />
+                      <span class="input-group-text material-icons" (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</span>
+                    </div>
                 </div>
                 <div class="form-outline mb-4">
                   <label class="form-label" for="phone">Phone</label>
                 <input #phone="ngModel" name="phone" [(ngModel)]="user.phone" type="text" id="phone" class="form-control" />
               </div>
 
-                <button class="btn btn-success btn-lg mb-1">Register</button>
+              <div *ngIf="errorMessage" class="alert alert-warning my-3"> {{ errorMessage }}</div>
+              <button class="btn btn-success btn-lg mb-1">Register</button>
   
               </form>
   

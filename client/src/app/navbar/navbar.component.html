@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">MODERN HOME </a>
+      <a class="navbar-brand" routerLink="/">MODERN HOME </a>
       
       <button class="navbar-toggler" (click)="isNavbarCollapsed = !isNavbarCollapsed"  type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,21 +23,23 @@
               <a class="nav-link" routerLink="/login">Login</a>
             </li>
           </ng-template>
-          <li ngbDropdown display="dynamic" *ngIf="isLoggedIn; else anonymousUser" class="nav-item dropdown my-auto">
+        
+          <li ngbDropdown display="dynamic" *ngIf="user; else anonymousUser" class="nav-item dropdown my-auto">
             <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" 
                  data-bs-toggle="dropdown" aria-expanded="false">
-                 {{ user?.name }}
+                  {{user?.name}}
               </a>
              <ul ngbDropdownMenu class="dropdown-menu" (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-labelledby="dropdown01">
               <li><a class="dropdown-item" routerLink="/my/profile">My Profile</a></li>
               <li><a class="dropdown-item" routerLink="/my/reservations">My Reservations</a></li> 
+              
               <ng-container *ngIf="user?.isAdmin">
                  <li><a class="dropdown-item" routerLink="/admin/apartments">Manage Apartments</a></li>
                  <li><a class="dropdown-item" routerLink="/admin/reservations">Manage Reservations</a></li>
               </ng-container>
-              <li class="dropdown-item"><a (click)="logout()">Log Out</a></li>        
+              <li><a class="dropdown-item" style="cursor: pointer" (click)="logout()">Log Out</a></li>        
              </ul>
-           </li>
+            </li>
 
         </ul>        
       </div>
@@ -45,4 +47,4 @@
   </nav>
 
   
-   
+  

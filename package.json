@@ -1,11 +1,13 @@
 {
   "name": "node_backend",
+  "jest": {
+    "testPathIgnorePatterns": ["client"] }, 
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "jest --watchAll --coverage  --forceExit",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +22,15 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "mongoose": "^6.0.8",
+    "nodemon": "^2.0.14",
     "path": "^0.12.7"
   },
   "engines": {
     "npm": "7.6.0",
     "node": "12.19.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "supertest": "^6.1.6"
   }
 }

@@ -13,7 +13,7 @@ export class HomeComponent {
   checkIn!: Date; 
   checkOut!: Date;
   categories$: Observable<any>; 
-  guests: string= "Guests";
+  guests = 0;
   d: any;
 
   constructor(
@@ -21,23 +21,26 @@ export class HomeComponent {
     private router: Router,
     private dateS: DateService) { 
 
-    this.d = this.dateS.limits();
+    this.d = this.dateS.minMaxLimits();
     this.categories$ = this.categoryS.getAllCategories();  
   };
  
 checkInChange(){
-  this.d.min2 = this.dateS.changeDay(this.checkIn, 1);
+  this.d.min2 = this.dateS.nextDay(this.checkIn);
 }
 
 checkOutChange(){
-  this.d.max1 = this.dateS.changeDay(this.checkOut, -1);
+  this.d.max1 = this.dateS.previousDay(this.checkOut);
 }
 
 search(){
- this.router.navigate(['/apartments'], {queryParams: 
-  {checkIn: this.checkIn.toDateString(), 
-   checkOut: this.checkOut.toDateString(), 
-   guests: this.guests
+  const checkin = (this.checkIn) ? this.checkIn.toDateString() : "";
+  const checkout = (this.checkOut) ? this.checkOut.toDateString() : "";
+ 
+ this.router.navigate(['/apartments'], {queryParams: {
+   checkIn:  checkin || null, 
+   checkOut: checkout || null, 
+   guests: this.guests || null
  }})
 }
 

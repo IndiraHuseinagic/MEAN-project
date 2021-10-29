@@ -4,7 +4,7 @@ const reservations = require('../routes/reservations');
 const users = require('../routes/users');
 const auth = require('../routes/auth');
 
-module.exports = function(app){
+module.exports = function (app) {
   app.use('/api/categories', categories);
   app.use('/api/apartments', apartments);
   app.use('/api/reservations', reservations);
@@ -15,8 +15,7 @@ module.exports = function(app){
 
 
 
- 
-  
- 
-  
-  
+
+
+
+
