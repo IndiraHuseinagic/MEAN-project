@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
-import { take } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +9,15 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  user = {name: "",email: "",password: "", phone: ""}; 
-  errorMessage: string ="";
+  user = { name: "", email: "", password: "", phone: "" };
+  errorMessage: string = "";
   hide: boolean = true;
-  
+
   constructor(private userS: UserService, private router: Router) { }
 
-  register(){
-    this.userS.register(this.user).pipe(take(1)).subscribe( 
-      ()=> { 
+  register() {
+    this.userS.register(this.user).pipe(first()).subscribe(
+      () => {
         alert("Registration successful");
         this.router.navigate(['/login']);
       },

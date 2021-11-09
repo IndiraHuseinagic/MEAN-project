@@ -83,5 +83,4 @@ router.delete('/:id', [auth, admin, validateObjectId], async (req, res) => {
     res.send(apartment);
 })
 
-
 module.exports = router;

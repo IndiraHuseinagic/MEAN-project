@@ -1,4 +1,3 @@
-
 export interface Apartment{
     _id: string;
     title: string;
@@ -7,6 +6,6 @@ export interface Apartment{
     address: string;
     guests: number,
     area: number,
-    unavailable: [{checkIn: Date, checkOut: Date}],
+    unavailable: {checkIn: Date, checkOut: Date}[],
     dailyPrice: number
 }

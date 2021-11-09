@@ -8,27 +8,26 @@ import { first } from 'rxjs/operators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
-  user = {email: "", password: ""}; 
-  errorMessage: string ="";
+export class LoginComponent {
+  user = { email: "", password: "" };
+  errorMessage: string = "";
   hide: boolean = true;
 
-
   constructor(
-    private authS: AuthService, 
-    private router: Router, 
-    private route: ActivatedRoute) {}
+    private authS: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-  login(){
+  login() {
     this.authS.login(this.user).pipe(first()).subscribe(
-        data => {
-           alert('Log in successful!');
-            let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-            this.router.navigateByUrl(returnUrl);
-          },      
-        error =>{
-         this.errorMessage = error;
-       }); 
+      data => {
+        alert('Log in successful!');
+        let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigateByUrl(returnUrl);
+      },
+      error => {
+        this.errorMessage = error;
+      });
   }
 
 

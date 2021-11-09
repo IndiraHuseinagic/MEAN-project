@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
 const validate = require('../middleware/validate')
 
-
 //GET
 router.get('/me', auth, async (req, res) => {
   const user = await User.findById(req.user._id).select('-password').select("-__v"); //we get _id from jwt not from route params
@@ -38,6 +37,5 @@ router.post('/', validate(validateUser), async (req, res) => {
     .header('x-auth-token', token)
     .send(_.pick(user, ['_id', 'name', 'email', 'phone'])); //no password to client
 })
-
 
 module.exports = router;

@@ -1,29 +1,31 @@
 <div class="router-container">
-  <div class="card flex-md-row mb-5 px-0" *ngFor="let a of apartments$ | async"> 
-    <div class="image"> 
+  <div class="card flex-md-row mb-5 px-0" *ngFor="let a of apartments$ | async">
+    <div class="image">
       <a [routerLink]="['/apartments/', a._id]">
         <img [src]="a.imageUrl" class="card-img-top" alt="apartments photo">
-        <div class="img-text">Gratis Cancellation</div>   
+        <div class="img-text">Gratis Cancellation</div>
       </a>
-    </div> 
+    </div>
     <div class="card-body">
       <h1 class="card-title"> {{ a.title }}</h1>
       <h4 class="card-title">{{ a.category.name }}</h4>
       <div class="card-text">
         <div class="clearfix mb-3">
-        <div class="info"><img class="icon-guest" width="15" src="../../assets/img/user.png" alt="guest"> {{ a.guests}} <span class="d-none d-sm-inline"> guest(s)</span></div>
-        <div class="info"><img class="icon-bed" width="20" src="../../assets/img/bed2.png" alt="bed"> X {{ a.guests}} </div>
-        <div class="info">{{ a.area }}m<sup>2</sup></div>
+          <div class="info"><img class="icon-guest" width="15" src="../../assets/img/user.png" alt="guest"> {{
+            a.guests}} <span class="d-none d-sm-inline"> guest(s)</span></div>
+          <div class="info"><img class="icon-bed" width="20" src="../../assets/img/bed2.png" alt="bed"> X {{ a.guests}}
+          </div>
+          <div class="info">{{ a.area }}m<sup>2</sup></div>
         </div>
         <p> <img class="icon-location" width="20" src="../../assets/img/location.png" alt="location"> {{ a.address}}</p>
       </div>
       <p class="price-text mt-5">Price for night </p>
       <div class="price-flex">
-      <p class="price">{{ a.dailyPrice | currency: 'EUR' }}</p>
-      <a class="btn btn-primary btn-choose" [routerLink]="['/apartments/', a._id]">Choose <span class="d-none d-lg-inline">Apartment</span></a>
+        <p class="price">{{ a.dailyPrice | currency: 'EUR' }}</p>
+        <a class="btn btn-primary btn-choose" [routerLink]="['/apartments/', a._id]">Choose <span
+            class="d-none d-lg-inline">Apartment</span></a>
       </div>
     </div>
     <br>
   </div>
 </div>
-

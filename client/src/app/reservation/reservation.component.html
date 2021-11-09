@@ -1,35 +1,33 @@
 <div class="router-container row" *ngIf="apartment$ | async as a">
-    
-    <div class="col-12 col-md-8 col-lg-7"> 
-       <img [src]="a.imageUrl" class="img-apartment">    
+
+    <div class="col-12 col-md-8 col-lg-7">
+        <img [src]="a.imageUrl" class="img-apartment">
     </div>
-            
-  
+
+
     <div class="col-12 col-md-4 col-lg-5" *ngIf="user$ | async as user">
-        
-        <h1 >Your Reservation</h1>
+
+        <h1>Your Reservation</h1>
         <!--User Info-->
         <p>Name: {{ user.name }}</p>
         <p>Email: {{ user.email }}</p>
         <p>Phone: {{ user.phone }}</p>
         <hr>
 
-       <!--Apartment Info-->
+        <!--Apartment Info-->
         <h1 class="mt-3">{{ a.title }}</h1>
         <p>Address: {{ a.address }}</p>
-        
-        <p>Check In:  {{ checkIn | date: 'MMM dd YYYY' }}</p>
+
+        <p>Check In: {{ checkIn | date: 'MMM dd YYYY' }}</p>
         <p>Check Out: {{ checkOut | date: 'MMM dd YYYY'}}</p>
-       
+
         <p>Your Price including Taxes:</p>
         <p class="price"> {{ daysDiff * a.dailyPrice | currency: 'EUR' }}</p>
-         
+
         <div class="text-center">
-            <a class="btn btn-primary btn-block m-2" 
-            [routerLink]="['/apartments/', a._id]">Cancel</a> 
-            <a class="btn btn-primary btn-block m-2" (click)="finish(user._id, a._id, checkIn, checkOut)">Finish</a>        
+            <a class="btn btn-primary btn-block m-2" [routerLink]="['/apartments/', a._id]">Cancel</a>
+            <a class="btn btn-primary btn-block m-2" (click)="finish(user._id, a._id, checkIn, checkOut)">Finish</a>
         </div>
-       
+
     </div>
 </div>
-

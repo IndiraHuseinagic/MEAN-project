@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const { Category } = require('../../../models/category');
 
 describe('/api/apartments', () => {
-
     let id;
     let route;
 

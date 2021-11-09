@@ -5,7 +5,7 @@ import { CanActivate, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminAuthGuard implements CanActivate{
+export class AdminAuthGuard implements CanActivate {
 
   constructor(private authS: AuthService, private router: Router) { }
 
@@ -13,7 +13,7 @@ export class AdminAuthGuard implements CanActivate{
     const user = this.authS.userValue;
 
     if (user.isAdmin) return true;
-    
+
     this.router.navigate(['/forbidden']);
     return false;
   }

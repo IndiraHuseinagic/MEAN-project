@@ -109,5 +109,4 @@ router.delete('/:id', [auth, validateObjectId], async (req, res) => {
   res.send(reservation);
 })
 
-
 module.exports = router;

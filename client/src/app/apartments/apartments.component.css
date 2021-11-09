@@ -17,26 +17,28 @@
 }
 
 .card-body {
-  min-width: 40%;
+    min-width: 40%;
 }
+
 .card .card-img-top {
     width: 100%;
     height: 100%;
-  }
-  .price-flex{
-    display: flex;
-  }
+}
 
-  .price {
+.price-flex{
+    display: flex;
+}
+
+.price {
     margin: 12px auto 0 0;
-   }
+}
   
 
-  .btn-choose {
+.btn-choose {
       margin-right: 18px;
-  }
+}
 
-  .image {
+.image {
     position: relative;
 }
 

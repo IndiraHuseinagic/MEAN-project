@@ -1,9 +1,11 @@
 .error {
     color: red;
 }
+
 .image {
     position: relative;
 }
+
 .img-apartment {
     width: 100%;
     height: auto;
@@ -21,8 +23,7 @@
 
 .overview {
     border: 1px solid rgba(0,0,0,0.125);
-    border-radius: 0.25rem;
-    
+    border-radius: 0.25rem;   
 }
 
 .features div {
@@ -53,20 +54,13 @@
   }
 
 .cancellation {
-    margin-left: auto;
-}
-
-.cancellation {
     color: #376d37;
     font-weight: 500;
     font-size: 18px;
     margin-top: 5px;
+    margin-left: auto;
 }
 
 ::ng-deep .cdk-overlay-connected-position-bounding-box {
     top: 50px !important;
-}
-
-::ng-deep .mat-form-field {
-    width: 200px !important;   
 }

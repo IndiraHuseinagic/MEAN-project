@@ -25,7 +25,6 @@ import { AdminReservationsComponent } from './admin-reservations/admin-reservati
 import { AdminApartmentsComponent } from './admin-apartments/admin-apartments.component';
 import { ReservationSummaryComponent } from './reservation-summary/reservation-summary.component';
 import { ApartmentFormComponent } from './apartment-form/apartment-form.component';
-import { BackButtonDirective } from './back-button.directive';
 import { InterceptorService } from './interceptor.service';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 
@@ -47,7 +46,6 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     AdminApartmentsComponent,
     ReservationSummaryComponent,
     ApartmentFormComponent,
-    BackButtonDirective,
     ForbiddenComponent
   ],
   imports: [
@@ -63,7 +61,6 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule
-    
   ],
   providers: [
     {

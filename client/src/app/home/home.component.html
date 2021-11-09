@@ -1,76 +1,71 @@
 <div class="main-img mt-1">
- 
+
     <div class="main-img-front p-2">
         <div class="row h-100 filters m-0">
-        <div class="filter col-6 col-md-3 p-0 d-flex align-self-center">
-        <mat-form-field  class="mx-auto" appearance="fill">
-            <mat-label> Check In </mat-label>
-            <input matInput [min]="d.min1" [max]="d.max1"
-             [matDatepicker]="checkin"
-             (dateInput)="checkInChange()"
-             [(ngModel)]="checkIn">
-            <mat-datepicker-toggle matSuffix [for]="checkin"></mat-datepicker-toggle>
-            <mat-datepicker #checkin></mat-datepicker>
-        </mat-form-field>
-       </div>
-        
-       <div class="filter col-6 col-md-3 p-0 d-flex align-self-center">
-        <mat-form-field class= "mx-auto" appearance="fill">
-            <mat-label> Check Out </mat-label>
-            <input matInput [min]="d.min2" [max]="d.max2" 
-            [matDatepicker]="checkout"
-            (dateInput)="checkOutChange()"
-            [(ngModel)]="checkOut">
-            <mat-datepicker-toggle matSuffix [for]="checkout"></mat-datepicker-toggle>
-            <mat-datepicker #checkout></mat-datepicker>
-        </mat-form-field>
-        </div>
-        
-        <div class="filter col-6 col-md-3 p-0 d-flex">
-        <select class="form-select guests mx-auto align-self-center" [(ngModel)]= "guests" aria-label="Select guests">
-            <option [ngValue]="0"> Guests</option>
-            <option ngValue="1">1 Guest</option>
-            <option ngValue="2">2 Guests</option>
-            <option ngValue="3">3 Guests</option>
-            <option ngValue="4">4 Guests</option>
-        </select>
-        </div>
-        <div class="filter col-6 col-md-3 p-0 d-flex">
-        <button class="btn btn-primary btn-search mx-auto align-self-center" (click)="search()">Search</button>
+            <div class="filter col-6 col-md-3 p-0 d-flex align-self-center">
+                <mat-form-field class="mx-auto" appearance="fill">
+                    <mat-label> Check In </mat-label>
+                    <input matInput [min]="d.min1" [max]="d.max1" [matDatepicker]="checkin"
+                        (dateInput)="checkInChange()" [(ngModel)]="checkIn">
+                    <mat-datepicker-toggle matSuffix [for]="checkin"></mat-datepicker-toggle>
+                    <mat-datepicker #checkin></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="filter col-6 col-md-3 p-0 d-flex align-self-center">
+                <mat-form-field class="mx-auto" appearance="fill">
+                    <mat-label> Check Out </mat-label>
+                    <input matInput [min]="d.min2" [max]="d.max2" [matDatepicker]="checkout"
+                        (dateInput)="checkOutChange()" [(ngModel)]="checkOut">
+                    <mat-datepicker-toggle matSuffix [for]="checkout"></mat-datepicker-toggle>
+                    <mat-datepicker #checkout></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="filter col-6 col-md-3 p-0 d-flex">
+                <select class="form-select guests mx-auto align-self-center" [(ngModel)]="guests"
+                    aria-label="Select guests">
+                    <option [ngValue]="0"> Guests</option>
+                    <option ngValue="1">1 Guest</option>
+                    <option ngValue="2">2 Guests</option>
+                    <option ngValue="3">3 Guests</option>
+                    <option ngValue="4">4 Guests</option>
+                </select>
+            </div>
+            <div class="filter col-6 col-md-3 p-0 d-flex">
+                <button class="btn btn-primary btn-search mx-auto align-self-center" (click)="search()">Search</button>
+            </div>
         </div>
     </div>
-   </div>       
 </div>
-
 
 <div class="router-container">
-   <h1 class="text-1 text-center">Rent furnished apartments</h1>
-   <h2 class="text-2 text-center pb-5">Looking for an apartment or house for rent? </h2>
-   <p class="home-text text-center">Your perfect place to live, work, or study is just one click away!</p>
+    <h1 class="text-1 text-center">Rent furnished apartments</h1>
+    <h2 class="text-2 text-center pb-5">Looking for an apartment or house for rent? </h2>
+    <p class="home-text text-center">Your perfect place to live, work, or study is just one click away!</p>
 
-<div class="row text-center justify-content-center pb-5"> 
-<div class="card mb-3" *ngFor="let c of categories$ | async" style="width: 18rem;">
-    <a class="category-card" [routerLink]="['/apartments/']" [queryParams]="{category: c.name}">
-      <div class="card-img-top" id="{{c.name}}"></div>
-      <div class="card-body">
-          <h5 class="card-title"> {{ c.name }}</h5>
-      </div>
-    </a>
-</div>
-</div>
+    <div class="row text-center justify-content-center pb-5">
+        <div class="card mb-3" *ngFor="let c of categories$ | async" style="width: 18rem;">
+            <a class="category-card" [routerLink]="['/apartments/']" [queryParams]="{category: c.name}">
+                <div class="card-img-top" id="{{c.name}}"></div>
+                <div class="card-body">
+                    <h5 class="card-title"> {{ c.name }}</h5>
+                </div>
+            </a>
+        </div>
+    </div>
 
-
-  <p class="px-3">
-    Our collection of apartments in Munich are fully furnished and decorated.
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna 
-    aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
-    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus 
-    est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur 
-    sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
-    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam 
-    et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-     no sea takimata sanctus est Lorem ipsum dolor sit amet. </p>
+    <p class="px-3">
+        Our collection of apartments in Munich are fully furnished and decorated.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+        aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+        est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+        sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+        et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+        no sea takimata sanctus est Lorem ipsum dolor sit amet. </p>
     <div class="my-3 px-5">
         &#10003; Secure Online Booking. <br>
         &#10003; Reserve From Anywhere! <br>
@@ -78,38 +73,39 @@
         &#10003; Family-Friendly Listings. <br>
         &#10003; Gratis Cancellation.
     </div>
- 
+
     <div class="text-center">
-    <img class="img-renting my-4" src="../../assets/img/renting2.jpeg" alt="">
+        <img class="img-renting my-4" src="../../assets/img/renting2.jpeg" alt="">
     </div>
-    
-    <p class="px-3 home-text text-center">In just a few steps find the right apartment that gives you all the freedom you need</p>
-  
+
+    <p class="px-3 home-text text-center">In just a few steps find the right apartment that gives you all the freedom
+        you need</p>
+
 
     <div class="row text-center no-gutters mx-auto steps p-3">
-      
+
         <div class="col-6 col-md-3 p-0">
             <div class="d-flex">
-                <div class="my-auto mx-auto">     
+                <div class="my-auto mx-auto">
                     <div class="step-text my-3">
                         <img class="img-steps" src="../../assets/img/search.png" alt="">
-                     <div class="step-no"><b>1st Step</b></div>
-                     <p>Choose perfect apartmant. </p>
+                        <div class="step-no"><b>1st Step</b></div>
+                        <p>Choose perfect apartmant. </p>
                     </div>
                 </div>
             </div>
         </div>
-       
+
 
         <div class="col-6 col-md-3 p-0">
             <div class="item-card mx-auto d-flex">
-                <div class="my-auto mx-auto">   
+                <div class="my-auto mx-auto">
                     <div class="step-text mt-3">
-                    <img class="img-steps" src="../../assets/img/date5.png" alt="">
-                     <div class="step-no"><b>2nd Step</b></div>
-                     <p>Choose CheckIn/Out Dates </p>
+                        <img class="img-steps" src="../../assets/img/date5.png" alt="">
+                        <div class="step-no"><b>2nd Step</b></div>
+                        <p>Choose CheckIn/Out Dates </p>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -121,24 +117,23 @@
                         <img class="img-steps" src="../../assets/img/reserve.png" alt="">
                         <div class="step-no"><b>3rd Step</b></div>
                         <p>Login and Reserve Online </p>
-                       </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-6 col-md-3 p-0">
             <div class="item-card mx-auto d-flex">
-                <div class="my-auto mx-auto">  
+                <div class="my-auto mx-auto">
                     <div class="step-text mt-3">
                         <img class="img-steps" src="../../assets/img/pay3.png" alt="">
                         <div class="step-no"><b>4th Step</b></div>
-                        <p>Pay directly on checkout  </p>
-                       </div>
+                        <p>Pay directly on checkout </p>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-   
-</div>
 
+</div>

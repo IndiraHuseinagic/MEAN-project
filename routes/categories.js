@@ -52,5 +52,4 @@ router.delete('/:id', [auth, admin, validateObjectId], async (req, res) => {
     res.send(category);
 })
 
-
 module.exports = router;

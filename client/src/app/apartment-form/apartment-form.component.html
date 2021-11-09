@@ -1,79 +1,78 @@
 <div class="router-container">
-  <form #f="ngForm" (ngSubmit)="save()">
-    <div class="row">
-        <div class="col-md-6">
-            <!--Title-->
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input [(ngModel)]="apartment.title" name="title" id="title" type="text" class="form-control">
-            </div>
+    <form #f="ngForm" (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-md-6">
+                <!--Title-->
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input [(ngModel)]="apartment.title" name="title" id="title" type="text" class="form-control">
+                </div>
 
-            <!--Category-->
-            <div class="form-group">
-                 <label for="category">Category</label>
+                <!--Category-->
+                <div class="form-group">
+                    <label for="category">Category</label>
                     <select [(ngModel)]="apartment.categoryId" name="categoryId" id="category" class="form-control">
-                         <option value=""></option>
-                         <option *ngFor="let c of categories$ | async" [value]="c._id">{{c.name}}</option>
+                        <option value=""></option>
+                        <option *ngFor="let c of categories$ | async" [value]="c._id">{{c.name}}</option>
                     </select>
-            </div>
-     
-             <!--Image-->
-             <div class="form-group">
-                 <label for="imageUrl">Image URL</label>
-                 <input [(ngModel)]="apartment.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
-             </div>
+                </div>
 
-            <!--Address-->
-            <div class="form-group">
-                 <label for="address">Address</label>
-                 <input [(ngModel)]="apartment.address" name="address" id="address" type="text" class="form-control">
-            </div>
+                <!--Image-->
+                <div class="form-group">
+                    <label for="imageUrl">Image URL</label>
+                    <input [(ngModel)]="apartment.imageUrl" name="imageUrl" id="imageUrl" type="text"
+                        class="form-control">
+                </div>
 
-            <!--Guests-->
-            <div class="form-group">
-                 <label for="guests">Guests</label>
-                 <input [(ngModel)]="apartment.guests" name="guests" id="guests" type="number" class="form-control"
-                    min="1" max="15">
-            </div>
+                <!--Address-->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input [(ngModel)]="apartment.address" name="address" id="address" type="text" class="form-control">
+                </div>
 
-            <!--Area-->
-            <div class="form-group">
-                 <label for="area">Area</label>
-                 <div class="input-group">
-                    <span class="input-group-text">m<sup>2</sup></span>
-                 <input [(ngModel)]="apartment.area" name="area" id="area" type="number" class="form-control">
-                 </div>
-            </div>
+                <!--Guests-->
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <input [(ngModel)]="apartment.guests" name="guests" id="guests" type="number" class="form-control"
+                        min="1" max="15">
+                </div>
 
-            <!--Price-->
-            <div class="form-group">
-                <label for="price">Price</label>
-                <div class="input-group">
-                    <span class="input-group-text">€</span>
-                    <input [(ngModel)]="apartment.dailyPrice" name="dailyPrice" id="price" type="text" class="form-control">
+                <!--Area-->
+                <div class="form-group">
+                    <label for="area">Area</label>
+                    <div class="input-group">
+                        <span class="input-group-text">m<sup>2</sup></span>
+                        <input [(ngModel)]="apartment.area" name="area" id="area" type="number" class="form-control">
+                    </div>
+                </div>
+
+                <!--Price-->
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">€</span>
+                        <input [(ngModel)]="apartment.dailyPrice" name="dailyPrice" id="price" type="text"
+                            class="form-control">
+                    </div>
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-warning my-3"> {{ errorMessage }}</div>
+                <div class="d-flex justify-content-center justify-content-md-start">
+                    <button class="btn btn-primary px-5 btn-save">Save</button>
+                    <button type="button" class="btn btn-danger px-5" (click)="delete()">Delete</button>
                 </div>
             </div>
-            <div *ngIf="errorMessage" class="alert alert-warning my-3"> {{ errorMessage }}</div>
-    <div class="d-flex justify-content-center justify-content-md-start">
-        <button class="btn btn-primary px-5 btn-save">Save</button>
-        <button type="button" class="btn btn-danger px-5" (click)="delete()">Delete</button>
-    </div>
 
-        </div>
-
-        <div class="col-md-6" *ngIf="apartment.imageUrl">
-            <div class="card flex-column my-4 px-0">  
-                 <img [src]="apartment.imageUrl" class="card-img-top" alt="apartments photo">
-                 <div class="card-body">
-                   <h1 class="card-title"> {{ apartment.title }}</h1>
-                   <div class="card-text"> {{ apartment.address}}</div>
-                   <p *ngIf="apartment.dailyPrice" class="price-text mt-5">Price/night </p>
-                   <p class="price">{{ apartment.dailyPrice | currency: 'EUR' }}</p>
+            <div class="col-md-6" *ngIf="apartment.imageUrl">
+                <div class="card flex-column my-4 px-0">
+                    <img [src]="apartment.imageUrl" class="card-img-top" alt="apartments photo">
+                    <div class="card-body">
+                        <h1 class="card-title"> {{ apartment.title }}</h1>
+                        <div class="card-text"> {{ apartment.address}}</div>
+                        <p *ngIf="apartment.dailyPrice" class="price-text mt-5">Price/night </p>
+                        <p class="price">{{ apartment.dailyPrice | currency: 'EUR' }}</p>
+                    </div>
                 </div>
             </div>
         </div>
-       
- 
-    </div>
-  </form>
+    </form>
 </div>

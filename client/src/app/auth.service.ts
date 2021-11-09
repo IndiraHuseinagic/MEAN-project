@@ -8,45 +8,44 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<any>;
+  public userSubject: BehaviorSubject<any>;
   public user$: Observable<any>;
 
   // Node/Express API
   REST_API: string = environment.baseUrl + '/auth';
 
-   // Http Header
-   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+  // Http Header
+  httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private httpClient: HttpClient) {
     this.userSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('user') || "{}"));
     this.user$ = this.userSubject.asObservable();
-   }
-   
-   get userValue() {
-      return this.userSubject.value;
-   }
+  }
 
+  get userValue() {
+    return this.userSubject.value;
+  }
 
   login(user: any) {
     const body = JSON.stringify(user);
-    return this.httpClient.post(this.REST_API, body, { headers: this.httpHeaders, responseType: 'text' , observe: 'response'})
-       .pipe(map((res: HttpResponse<any>) => {
-         //header
-         const token = res.headers.get('x-auth-token') || "";
-         localStorage.setItem('token', token);
+    return this.httpClient.post(this.REST_API, body, { headers: this.httpHeaders, responseType: 'text', observe: 'response' })
+      .pipe(map((res: HttpResponse<any>) => {
+        //header
+        const token = res.headers.get('x-auth-token') || "";
+        localStorage.setItem('token', token);
 
-         //body
-         const user = JSON.parse(res.body);
-         localStorage.setItem('user', JSON.stringify(user));
-         this.userSubject.next(user);
-         return user;
-        }));
-   };
+        //body
+        const user = JSON.parse(res.body);
+        localStorage.setItem('user', JSON.stringify(user));
+        this.userSubject.next(user);
+        return user;
+      }));
+  };
 
-  logout(){
-    localStorage.removeItem('token'); 
-    localStorage.removeItem('user'); 
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.userSubject.next(null);
-  } 
+  }
 
 }

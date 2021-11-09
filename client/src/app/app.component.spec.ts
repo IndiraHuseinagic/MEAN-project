@@ -1,16 +1,23 @@
+import { LocationStrategy } from '@angular/common';
+import { MockLocationStrategy } from '@angular/common/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
+
+  class StubComponent { }
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
+      declarations: [AppComponent],
+      imports: [ RouterTestingModule.withRoutes([
+        { path: '', component: StubComponent }]) 
       ],
-      declarations: [
-        AppComponent
-      ],
+      providers: [ 
+        { provide: LocationStrategy, useClass: MockLocationStrategy }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]  
     }).compileComponents();
   });
 
@@ -26,10 +33,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('modern-home');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('modern-home app is running!');
-  });
 });

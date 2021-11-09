@@ -1,5 +1,5 @@
 import { ReservationService } from './../reservation.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Reservation } from '../models/reservation';
 import { Observable } from 'rxjs';
 
@@ -8,11 +8,12 @@ import { Observable } from 'rxjs';
   templateUrl: './admin-reservations.component.html',
   styleUrls: ['./admin-reservations.component.css']
 })
-export class AdminReservationsComponent {
-reservations$: Observable<Reservation[]>;
+export class AdminReservationsComponent implements OnInit {
+  reservations$!: Observable<Reservation[]>;
 
-  constructor(private reservationS: ReservationService) { 
+  constructor(private reservationS: ReservationService) { }
+
+  ngOnInit() {
     this.reservations$ = this.reservationS.getAllReservations();
   }
-
 }

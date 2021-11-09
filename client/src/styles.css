@@ -8,6 +8,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding-top: 52px;
     min-height: 100vh;
  }
+ 
 .router-container {
     padding: 70px 20px;
  }

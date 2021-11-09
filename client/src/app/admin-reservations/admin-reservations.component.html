@@ -1,25 +1,23 @@
 <div class="router-container">
-    <h1>All Reservations</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Reservation ID</th>
-          <th>Apartment Name</th>
-          <th></th>
-        </tr>
-      </thead> 
-      <tbody>
-          
-        <tr *ngFor="let reservation of reservations$ | async">
-          <td>{{ reservation.user.name }}</td>
-          <td>{{ reservation._id }}</td>
-          <td>{{ reservation.apartment.title }}</td>
-          <td>
-            <a [routerLink]="['/reservation-summary', reservation._id]">View</a>
-          </td>
-        </tr>
-      
-      </tbody> 
-    </table>
-    </div>
+  <h1>All Reservations</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Apartment Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let reservation of reservations$ | async">
+        <td>{{ reservation.user.name }}</td>
+        <td>{{ reservation.apartment.title }}</td>
+        <td>
+          <a [routerLink]="['/reservation-summary', reservation._id]">View</a>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
