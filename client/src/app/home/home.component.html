@@ -1,8 +1,7 @@
 <div class="main-img mt-1">
 
-    <div class="main-img-front p-2">
-        <div class="row h-100 filters m-0">
-            <div class="filter col-6 col-md-3 p-0 d-flex align-self-center">
+        <div class="row filters m-0">
+            <div class="filter col-6 col-md-3 p-0 m-0 d-flex align-self-center">
                 <mat-form-field class="mx-auto" appearance="fill">
                     <mat-label> Check In </mat-label>
                     <input matInput [min]="d.min1" [max]="d.max1" [matDatepicker]="checkin"
@@ -12,7 +11,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="filter col-6 col-md-3 p-0 d-flex align-self-center">
+            <div class="filter col-6 col-md-3 p-0 m-0 d-flex align-self-center">
                 <mat-form-field class="mx-auto" appearance="fill">
                     <mat-label> Check Out </mat-label>
                     <input matInput [min]="d.min2" [max]="d.max2" [matDatepicker]="checkout"
@@ -22,7 +21,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="filter col-6 col-md-3 p-0 d-flex">
+            <div class="filter col-6 col-md-3 p-0 m-0 d-flex">
                 <select class="form-select guests mx-auto align-self-center" [(ngModel)]="guests"
                     aria-label="Select guests">
                     <option [ngValue]="0"> Guests</option>
@@ -32,11 +31,11 @@
                     <option ngValue="4">4 Guests</option>
                 </select>
             </div>
-            <div class="filter col-6 col-md-3 p-0 d-flex">
+            <div class="filter col-6 col-md-3 p-0 m-0 d-flex">
                 <button class="btn btn-primary btn-search mx-auto align-self-center" (click)="search()">Search</button>
             </div>
         </div>
-    </div>
+    
 </div>
 
 <div class="router-container">

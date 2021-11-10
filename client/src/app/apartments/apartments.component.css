@@ -3,6 +3,7 @@
     float: left;
     margin-right: 28px;
     font-weight: bold;
+    vertical-align: center;
 }
 
 .price-text {
@@ -55,3 +56,4 @@
 .active {
     color: #000;
 }
+

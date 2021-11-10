@@ -9,15 +9,14 @@
     left:0;
 }
 
-.main-img-front {
+.filters {
     position:absolute;
     background: rgba(0,0,0,0.6);
     left: 2.5%;
-    top: 60%;
+    bottom: 8%;
     width: 95%;
-    height: 25vh;    
+    padding: 2vh;
 }
-
 
 /*datepicker*/
 ::ng-deep .mat-form-field-flex {
@@ -26,11 +25,13 @@
 
 ::ng-deep .mat-form-field {
     padding: 0 !important;
-    width: 90% !important;  
+    width: 100% !important; 
+    margin: 0 !important;
 }
 
 ::ng-deep .mat-form-field-wrapper {
     padding: 0 !important;
+    margin: 10px !important;
 }
 
 ::ng-deep .mat-form-field-underline {
@@ -52,7 +53,8 @@
     border-radius: 5px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 15px;
-    width: 90%;
+    width: 100%;
+    margin: 10px !important;
 }
 
 .btn-search {
@@ -60,7 +62,8 @@
     border-radius: 5px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 15px;
-    width: 90%; 
+    width: 100%; 
+    margin: 10px !important;
 }
 
 .text-1, .text-2 {
