@@ -1,3 +1,4 @@
 {
     "jwtPrivateKey": "modern-home_jwtPrivateKey"
+    "db": "db"
 }
